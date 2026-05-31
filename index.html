@@ -25,7 +25,7 @@
       text-align: center;
     }
 
-    /* ===== INTRO ===== */
+    /* INTRO SCREEN */
     #intro {
       position: fixed;
       top: 0;
@@ -34,114 +34,51 @@
       height: 100vh;
       background: black;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
       color: white;
-      text-align: center;
-    }
-
-    .track {
-      width: 80%;
-      height: 20px;
-      background: white;
-      position: relative;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 0 20px red;
-    }
-
-    .car {
-      position: absolute;
-      font-size: 50px;
-      top: -28px;
-      animation: race 1.5s linear infinite;
-    }
-
-    @keyframes race {
-      0% { left: -10%; }
-      100% { left: 100%; }
-    }
-
-    #countdown {
-      font-size: 90px;
+      font-size: 60px;
       font-weight: bold;
-      margin: 20px;
-    }
-
-    .intro-text {
-      font-size: 20px;
-      letter-spacing: 2px;
     }
   </style>
 </head>
 
-<body onclick="startSound()">
-
-<!-- 🔊 SOUND -->
-<audio id="intro-sound" src="Formula-One-F1-Sound-Effect-ProSounds(1).mp3"></audio>
+<body>
 
 <!-- 🏁 INTRO -->
-<div id="intro">
-
-  <div class="track">
-    <div class="car">🏎️</div>
-  </div>
-
-  <h2 class="intro-text">GET READY YOUR FILE</h2>
-
-  <div id="countdown">3</div>
-
-</div>
+<div id="intro">3</div>
 
 <!-- 🌐 WEBSITE -->
-<img src="https://smskp.edu.my/.png" class="logo">
+<img src="https://via.placeholder.com/150" class="logo">
 
 <div class="box">
   <h1>SELAMAT DATANG KE UNIT BIMBINGAN KAUNSELING WEBSITE</h1>
-  <p style="color:white">SEKOLAH MENENGAH SAINS KUBANG PASU</p>
+  <p>SEKOLAH MENENGAH SAINS KUBANG PASU</p>
 </div>
 
 <!-- ⚡ SCRIPT -->
 <script>
-function startSound(){
-  document.getElementById("intro-sound").play();
-}
+let count = 3;
+let intro = document.getElementById("intro");
 
-window.onload = function() {
+let timer = setInterval(() => {
 
-  let sound = document.getElementById("intro-sound");
-  let count = 3;
-  let el = document.getElementById("countdown");
+  count--;
 
-  // autoplay attempt
-  sound.play().catch(()=>{});
+  if (count > 0) {
+    intro.innerText = count;
+  } 
+  else {
+    intro.innerText = "GO!";
+  }
 
-  let timer = setInterval(() => {
+  if (count < 0) {
+    clearInterval(timer);
+    intro.style.display = "none";
+  }
 
-    count--;
-
-    if(count > 0){
-      el.innerText = count;
-    }
-
-    if(count === 0){
-      el.innerText = "GO!";
-    }
-
-    if(count < 0){
-      clearInterval(timer);
-
-      sound.pause();
-      sound.currentTime = 0;
-
-      document.getElementById("intro").style.display = "none";
-    }
-
-  }, 1000);
-
-};
+}, 1000);
 </script>
 
 </body>
